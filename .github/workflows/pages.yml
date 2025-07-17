@@ -1,9 +1,9 @@
-name: Déploiement GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Remplace par le nom réel de ta branche si c’est "master"
+      - main  # Make sure your default branch is called "main"
 
 permissions:
   contents: read
@@ -11,23 +11,22 @@ permissions:
   id-token: write
 
 jobs:
-  déploiement:
+  deploy:
     environment:
       name: github-pages
     runs-on: ubuntu-latest
     steps:
-
-      - name: 📥 Cloner le dépôt
+      - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: ⚙️ Configurer GitHub Pages
+      - name: ⚙️ Setup Pages
         uses: actions/configure-pages@v3
 
-      - name: 📦 Uploader les fichiers du site
+      - name: 📦 Upload site content
         uses: actions/upload-pages-artifact@v2
         with:
-          path: public  # Dossier contenant ton index.html
+          path: public  # This folder should contain your index.html
 
-      - name: 🚀 Déployer le site
-        id: déploiement
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v2
