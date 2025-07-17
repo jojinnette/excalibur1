@@ -6,26 +6,24 @@ on:
       - main # or your default branch
 
 jobs:
-  build-and-deploy:
+  deploy:
+    environnement: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v3
 
-      - name: Install dependencies
-        run: npm install
+      - name: Upload du site
+        uses: actions/upload-pages-artifact@v2
+       with:
+         path: public
 
-      - name: Build React app
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+      - name: Déployer
+        id: deployment
+        uses:actions/deploy-pages@v2
