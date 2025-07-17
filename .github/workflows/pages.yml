@@ -23,10 +23,9 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: 📦 Upload site content
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: site-artifact
-          path: public
+          path: public  # make sure public/index.html exists
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
