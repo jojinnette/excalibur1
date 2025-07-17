@@ -23,9 +23,10 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: 📦 Upload site content
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: public  # This folder should contain your index.html
+  uses: actions/upload-artifact@v4
+  with:
+    name: site-artifact
+    path: public
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
